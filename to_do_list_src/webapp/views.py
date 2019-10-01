@@ -21,7 +21,7 @@ class IndexRedirectView(RedirectView):
 
 
 class ArticleView(TemplateView):
-    template_name = 'article_view.html'
+    template_name = 'article/article_view.html'
 
     def get_context_data(self, **kwargs):
         pk = kwargs.get('pk')
@@ -36,7 +36,7 @@ class ArticleView(TemplateView):
 class ArticleCreateView(View):
     def get(self, request, *args, **kwargs):
         form = ArticleForm()
-        return render(request, 'article_create.html', context={'form': form})
+        return render(request, 'article/article_create.html', context={'form': form})
 
     def post(self, request, *args, **kwargs):
         form = ArticleForm(data=request.POST)
@@ -45,7 +45,7 @@ class ArticleCreateView(View):
                                              text=form.cleaned_data['text'],
                                              author=form.cleaned_data['author'])
             return redirect('article_view', pk=article.pk)
-        return render(request, 'article_create.html', context={'form': form})
+        return render(request, 'article/article_create.html', context={'form': form})
 
 
 class ArtUpdateView(View):
@@ -53,7 +53,7 @@ class ArtUpdateView(View):
         pk = kwargs.get('pk')
         article = get_object_or_404(Article, pk=pk)
         form = ArticleForm(data={'title': article.title, 'text': article.text, 'author': article.author})
-        return render(request, 'article_update_view.html', context={'form': form, 'article': article})
+        return render(request, 'article/article_update_view.html', context={'form': form, 'article': article})
 
     def post(self, request, *args, **kwargs):
         pk = kwargs.get('pk')
@@ -67,7 +67,7 @@ class ArtUpdateView(View):
             article.save()
             return redirect('article_view', pk=article.pk)
         else:
-            return render(request, 'article_update_view.html', context={
+            return render(request, 'article/article_update_view.html', context={
                 'form': form, 'article': article
             })
 
@@ -77,7 +77,7 @@ class ArtDeleteView(View):
         pk = kwargs.get('pk')
         article = get_object_or_404(Article, pk=pk)
         form = ArticleForm(data={'title': article.title, 'text': article.text, 'author': article.author})
-        return render(request, 'delete_view.html', context={'form': form, 'article': article})
+        return render(request, 'article/delete_view.html', context={'form': form, 'article': article})
 
     def post(self, request, *args, **kwargs):
         pk = kwargs.get('pk')
@@ -89,7 +89,7 @@ class ArtDeleteView(View):
 class CommentAddView(CreateView):
     model = Comment
     form_class = CommentForm
-    template_name = 'comment_add.html'
+    template_name = 'comment/comment_add.html'
     success_url = '/comments/'
 
     def form_valid(self, form):
@@ -108,7 +108,7 @@ class CommentAddView(CreateView):
                                                  author=form.cleaned_data['author'])
                 comment.save()
                 return redirect('article_view', pk=article_pk)
-            return render(request, 'comment_add.html', context={'form': form})
+            return render(request, 'comment/comment_add.html', context={'form': form})
         else:
             return super().post(request, *args, **kwargs)
 
@@ -116,14 +116,14 @@ class CommentAddView(CreateView):
 class CommentListView(ListView):
     model = Comment
     paginate_by = 10
-    template_name = 'comment_list.html'
+    template_name = 'comment/comment_list.html'
     ordering = ['-created_at']
 
 
 class CommentEditView(UpdateView):
     model = Comment
     fields = ['author', 'text', 'article']
-    template_name = 'comment_edit.html'
+    template_name = 'comment/comment_edit.html'
     success_url = '/comments/'
 
     def form_valid(self, form):
@@ -131,5 +131,5 @@ class CommentEditView(UpdateView):
 
 class CommentDeleteView(DeleteView):
     model = Comment
-    template_name = 'comment_delete.html'
+    template_name = 'comment/comment_delete.html'
     success_url = '/comments/'
