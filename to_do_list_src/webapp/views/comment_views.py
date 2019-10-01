@@ -3,7 +3,8 @@ from django.shortcuts import render, redirect
 from webapp.forms import CommentForm
 from webapp.models import Article, Comment
 
-from django.views.generic import CreateView, ListView, UpdateView, DeleteView
+from django.views.generic import CreateView, UpdateView, DeleteView, ListView
+
 
 
 class CommentAddView(CreateView):
@@ -37,6 +38,7 @@ class CommentListView(ListView):
     model = Comment
     paginate_by = 10
     template_name = 'comment/comment_list.html'
+    context_object_name = 'comments'
     ordering = ['-created_at']
 
 
