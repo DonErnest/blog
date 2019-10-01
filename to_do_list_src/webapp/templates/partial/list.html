@@ -1,0 +1,30 @@
+{% load widget_tweaks %}
+
+{% block comments_list %}
+    <ul class="list-group">
+        <li class="list-group-item">
+            <h6 class="font-italic"><strong>Comments</strong></h6>
+        </li>
+        {% for comment in object_list %}
+            <li class ="list-group-item d-flex flex-column">
+                <div class="row">
+                    <h6 class="font-italic ml-3">
+                        <strong>{{ comment.author }} to </strong>
+                        <a href="{% url 'article_view' comment.article.pk %}" class="">{{ comment.article }}</a>
+                    </h6>
+                    <span class="ml-auto">Created at: {{ comment.created_at }}</span>
+                </div>
+                <div class="row">
+                    <p class="ml-3">{{ comment.text }}</p>
+
+                </div>
+                <div class="row">
+                    <a href="{% url 'edit comment' comment.pk %}" class="ml-auto btn btn-light"><i class="fas fa-pen-square crud_comment"></i></a>
+                    <a href="{% url 'delete comment' comment.pk %}" class="btn btn-light"><i class="fas fa-eraser crud_comment"></i></a>
+                </div>
+            </li>
+        {% empty %}
+            <li class ="list-group-item">No comments yet.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
