@@ -1,0 +1,64 @@
+[
+{
+  "model": "webapp.article",
+  "pk": 4,
+  "fields": {
+    "title": "studying PK parameters and git",
+    "text": "Now I try to figure out how pk works if all articles are deleted. Now I try to not to lose the points",
+    "author": "Bob Marley",
+    "created_at": "2019-09-05T05:21:10.986Z",
+    "updated_at": "2019-10-01T08:18:11.887Z"
+  }
+},
+{
+  "model": "webapp.article",
+  "pk": 5,
+  "fields": {
+    "title": "The most important imperial stuff",
+    "text": "To be or not to be,\r\nthat's the question.\r\nwhether tis nobler in the mind to suffer ",
+    "author": "",
+    "created_at": "2019-09-06T14:52:33.071Z",
+    "updated_at": "2019-09-10T13:53:41.902Z"
+  }
+},
+{
+  "model": "webapp.article",
+  "pk": 7,
+  "fields": {
+    "title": "\u0423\u0432\u043b\u0435\u043a\u0430\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u043f\u0443\u0442\u0435\u0448\u0435\u0441\u0442\u0432\u0438\u044f \u0432 \u0414\u0436\u0430\u043d\u0433\u043e",
+    "text": "\u041d\u0443, \u044f \u043a\u043e\u043d\u0435\u0447\u043d\u043e \u043f\u0440\u0438\u0432\u0440\u0430\u043b, \r\n\u043e\u043d\u0438 \u043d\u0435 \u0443\u0432\u043b\u0435\u043a\u0430\u0442\u0435\u043b\u044c\u043d\u044b\u0435, \r\n\u043d\u043e \u0437\u0430\u0431\u0430\u0432\u043d\u044b\u0435",
+    "author": "\u042f",
+    "created_at": "2019-09-10T15:09:35.127Z",
+    "updated_at": "2019-09-10T15:09:35.127Z"
+  }
+},
+{
+  "model": "webapp.article",
+  "pk": 9,
+  "fields": {
+    "title": "\u041a\u043e\u043c\u043c\u0435\u043d\u0442\u044b \u043a \u0441\u0442\u0430\u0442\u044c\u0435",
+    "text": "\u0432 \u044d\u0442\u043e\u0439 \u0441\u0442\u0430\u0442\u044c\u0435 \u043c\u044b \u0440\u0430\u0441\u0441\u043a\u0430\u0436\u0435\u043c, \u043a\u0430\u043a \u043a \u0441\u0442\u0430\u0442\u044c\u044f\u043c \u043f\u0440\u0438\u043f\u0438\u043b\u0438\u0442\u044c \u043a\u043e\u043c\u043c\u0435\u043d\u0442\u0430\u0440\u0438\u0438. \u0410 \u043f\u043e\u0442\u043e\u043c \u043e\u0442\u043f\u0438\u043b\u0438\u0442\u044c \u043a\u043e\u043c\u043c\u0435\u043d\u0442\u0430\u0440\u0438\u0438 \u0438 \u0441\u0434\u0435\u043b\u0430\u0442\u044c \u0432\u0438\u0434, \u0447\u0442\u043e \u0438\u0445 \u043d\u0438\u043a\u043e\u0433\u0434\u0430 \u043d\u0435 \u0431\u044b\u043b\u043e. \r\n\u0412\u0440\u043e\u0434\u0435 , \u043f\u043e\u043b\u0443\u0447\u0430\u0435\u0442\u0441\u044f",
+    "author": "\u0412\u0430\u0441\u044f \u041f\u0443\u043f\u043a\u0438\u043d",
+    "created_at": "2019-09-24T13:35:59.804Z",
+    "updated_at": "2019-10-01T08:23:05.529Z"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$X4niv1F51evx$SIVXNUhDGeKzPVrammcq6lRlUuvLkfZSJtDpch+lq4s=",
+    "last_login": "2019-09-27T13:48:13.719Z",
+    "is_superuser": true,
+    "username": "ernest_aitiev",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2019-09-05T04:39:04.001Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]

@@ -1,0 +1,32 @@
+body{
+    /*background-color: limegreen;*/
+}
+.container{
+    background-color: white;
+}
+.form_box{
+    width: 50%;
+}
+.article{
+    border: 2px solid;
+    padding: 1rem 1rem;
+}
+.conf_quest{
+    font-style: italic;
+    font-weight: bold;
+}
+
+.form-error {
+    color: red;
+    font-size: 12px;
+    margin: 5px 0 0 0
+}
+
+.field-error {
+    border: solid 1px red;
+    box-shadow: red 0 0 3px;
+}
+
+.crud_comment{
+    font-size: 2rem;
+}

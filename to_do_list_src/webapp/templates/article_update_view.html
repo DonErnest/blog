@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Create Article
+{% endblock %}
+{% block content %}
+    <div class="d-flex flex-column">
+        <h1 class = "align-self-center pt-3">Update Article</h1>
+        <div class="article w-50 align-self-center mb-3">
+            <form method="POST" action="{% url 'article_update' article.pk %}" class="pt-3">
+                {% include 'partial/article_form.html' with button_text='Update'%}
+            </form>
+        </div>
+    </div>
+{% endblock %}

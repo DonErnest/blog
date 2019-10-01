@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block menu %}
+    <li class="nav-link"><a href="{% url 'article_add' %}">Add Article</a></li>
+{% endblock %}
+
+{% block content %}
+    <h1 class = "text-center pt-3">Articles</h1>
+        <div class="mt-1 mb-1 row justify-content-center">
+            {% for article in articles %}
+                <div class="card ml-1 mr-1 mb-1" style="width: 18rem;">
+                    <div class="card-body ">
+                        <h5 class="card-title">{{ article.title }}</h5>
+                    </div>
+                    <div class="btn-group">
+                        <a href="{% url 'article_view' article.pk %}" class="card-link btn btn-success btn-sm">Read</a>
+                        <a href="{% url 'article_update' article.pk %}" class="card-link btn btn-success btn-sm">Update</a>
+                        <a href="{% url 'article_delete' article.pk %}" class="card-link btn btn-success btn-sm">Delete</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+{% endblock %}

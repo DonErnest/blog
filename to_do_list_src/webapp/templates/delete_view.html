@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Delete
+{% endblock %}
+{% block content %}
+    <div class="pt-5 pb-5">
+        <div class="article">
+            <h1 class = "text-center pt-3"><strong>Deleting Article</strong></h1>
+            <h2 class="text-center">{{ form.data.title }}</h2>
+            <h5 class="pl-5 conf_quest" >Are you sure that you want to delete this article?</h5>
+            <form method="POST" action="{% url 'article_delete' article.pk %}">
+                {% csrf_token %}
+                <div class = "btn-group pl-5">
+                    <input type="submit" class  = 'btn btn-outline-secondary' value="Confirm">
+                    <a type="submit" class  = 'btn btn-outline-secondary' href="{% url 'article_view' article.pk %}">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

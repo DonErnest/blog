@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}
+    View
+{% endblock %}
+{% block menu %}
+    <li><a href="{% url 'article_update' article.pk %}" class="nav-link">Update</a></li>
+    <li><a href="{% url 'article_delete' article.pk %}" class="nav-link">Delete</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex flex-column">
+        <div class = "article w-100 mr-auto ml-auto mb-5">
+            <h1 class = "text-center">{{ article.title }}</h1>
+            <p><strong>By:</strong> {{ article.author }}</p>
+            <p>{{ article.text|escape|linebreaks }}</p>
+            <p class="font-italic">Created at {{ article.created_at }}</p>
+            <a href="{% url 'article_update' article.pk %}" class="card-link btn btn-success">Update</a>
+            <a href="{% url 'article_delete' article.pk %}" class="card-link btn btn-success">Delete</a>
+        </div>
+    </div>
+
+{% endblock %}
