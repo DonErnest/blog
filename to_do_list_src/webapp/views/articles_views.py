@@ -1,23 +1,22 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
 from webapp.forms import ArticleForm, CommentForm
-from webapp.models import Article, Comment
+from webapp.models import Article
 
-from django.views.generic import View, CreateView, ListView, UpdateView, DeleteView
-from django.views.generic import TemplateView, RedirectView
+from django.views.generic import View, ListView, RedirectView
+from django.views.generic import TemplateView
 
 
-class IndexView(TemplateView):
+class IndexView(ListView):
     template_name = 'index.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['articles'] = Article.objects.all()
-        return context
+    model = Article
+    context_object_name = 'articles'
+    ordering = ['-created_at']
 
 
 class IndexRedirectView(RedirectView):
     pattern_name = 'index'
+
 
 
 class ArticleView(TemplateView):
@@ -84,52 +83,3 @@ class ArtDeleteView(View):
         article = get_object_or_404(Article, pk=pk)
         article.delete()
         return redirect('index')
-
-
-class CommentAddView(CreateView):
-    model = Comment
-    form_class = CommentForm
-    template_name = 'comment/comment_add.html'
-    success_url = '/comments/'
-
-    def form_valid(self, form):
-        return super().form_valid(form)
-
-    def post(self, request, *args, **kwargs):
-        if kwargs.get('pk'):
-            article_pk=kwargs.get('pk')
-            article = Article.objects.get(pk=article_pk)
-            form = CommentForm(data={'article': article.pk,
-                                     'text': request.POST['text'],
-                                     'author': request.POST['author']})
-            if form.is_valid():
-                comment = Comment.objects.create(article=form.cleaned_data['article'],
-                                                 text=form.cleaned_data['text'],
-                                                 author=form.cleaned_data['author'])
-                comment.save()
-                return redirect('article_view', pk=article_pk)
-            return render(request, 'comment/comment_add.html', context={'form': form})
-        else:
-            return super().post(request, *args, **kwargs)
-
-
-class CommentListView(ListView):
-    model = Comment
-    paginate_by = 10
-    template_name = 'comment/comment_list.html'
-    ordering = ['-created_at']
-
-
-class CommentEditView(UpdateView):
-    model = Comment
-    fields = ['author', 'text', 'article']
-    template_name = 'comment/comment_edit.html'
-    success_url = '/comments/'
-
-    def form_valid(self, form):
-        return super().form_valid(form)
-
-class CommentDeleteView(DeleteView):
-    model = Comment
-    template_name = 'comment/comment_delete.html'
-    success_url = '/comments/'
