@@ -17,4 +17,5 @@ urlpatterns = [
     path('comments/', CommentListView.as_view(), name='comments list'),
     path('comment/<int:pk>/edit/', CommentEditView.as_view(), name='edit comment'),
     path('comment/<int:pk>/', CommentDeleteView.as_view(), name='delete comment'),
+    path('article/<int:pk>/comment/add/', CommentAddView.as_view(), name='add comment to article')
 ]

@@ -1,0 +1,25 @@
+{% load widget_tweaks %}
+{% csrf_token %}
+
+{% for error in form.not_field_errors %}
+    <p class="form-error">{{ error }}</p>
+{% endfor %}
+
+{% for field in form %}
+    {% if field is form.article %}
+    {% else %}
+        <div class = "form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {% if field.errors %}
+                {{ field|add_class:'form-control field-error'}}
+            {% else %}
+                {{ field|add_class:'form-control'}}
+            {% endif %}
+            {% for error in field.errors %}
+                <p class="form-error">{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endfor %}
+
+<input type="submit" class='btn btn-outline-secondary' value={{ button_text }}>

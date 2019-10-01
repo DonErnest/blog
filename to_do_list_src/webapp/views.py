@@ -27,6 +27,9 @@ class ArticleView(TemplateView):
         pk = kwargs.get('pk')
         context = super().get_context_data(**kwargs)
         context['article'] = get_object_or_404(Article, pk=pk)
+        article = Article.objects.get(pk=pk)
+        context['object_list'] = article.comments.filter(article_id=article.pk).order_by('-created_at')
+        context['form'] = CommentForm()
         return context
 
 
