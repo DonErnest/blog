@@ -17,9 +17,12 @@
             <a href="{% url 'article_update' article.pk %}" class="card-link btn btn-success">Update</a>
             <a href="{% url 'article_delete' article.pk %}" class="card-link btn btn-success">Delete</a>
         </div>
+        {% if is_paginated %}
+            {% include 'partial/pagination.html' %}
+        {% endif %}
         <div class="w-50 pb-5">
             <form method="POST" action="{% url 'add comment to article' article.pk %}" class=" pt-3 pb-3">
-                {% include 'partial/comment_form.html' with button_text='Add' %}
+                {% include 'partial/article_form.html' with button_text='Add' %}
             </form>
         </div>
         {% include 'partial/list.html' %}

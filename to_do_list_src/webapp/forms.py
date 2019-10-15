@@ -16,3 +16,17 @@ class CommentForm(forms.ModelForm):
         fields=['article', 'text', 'author']
         labels={'article': 'Статья', 'text': 'Комментарий', 'author': 'Автор'}
 
+
+class ArticleCommentForm(forms.ModelForm):
+    # author = forms.CharField(max_length=40, required=False, label='Author', initial='Аноним')
+    # text = forms.CharField(max_length=400, required=True, label='Text',
+    #                        widget=widgets.Textarea)
+
+    class Meta:
+        model = Comment
+        fields=['author', 'text']
+        labels={'text': 'Комментарий', 'author': 'Автор'}
+
+class SimpleSearchForm(forms.Form):
+    search = forms.CharField(max_length=100, required=False, label='Поиск')
+    
