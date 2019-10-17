@@ -131,10 +131,15 @@ class ArtUpdateView(UpdateView):
         return tag_queryset
 
     def get_tag_list(self):
-        tag_list = Tag.objects.filter(articles__title=self.object.title)
-        return tag_list
+        name_list=[]
+        tag_list = Tag.objects.filter(articles__title=self.object.title).values('name')
+        for name in tag_list:
+            name_list.append(name.get('name'))
+        tags = ','.join(name_list)
+        return tags
 
     def form_valid(self, form):
+        self.object.tags.clear()
         tags = self.get_tags(form)
         form.cleaned_data.pop('tags')
         self.object = form.save()
@@ -145,9 +150,10 @@ class ArtUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         if 'form' not in kwargs:
             kwargs['form'] = self.get_form()
-            if self.get_tag_list():
+            tags=self.get_tag_list()
+            if tags:
                 kwargs['form'] = self.form_class(data={'title': self.object.title, 'text': self.object.text,
-                                                   'author': self.object.author, 'tags': self.get_tag_list()})
+                                                   'author': self.object.author, 'tags': tags})
             else:
                 kwargs['form'] = self.form_class(data={'title': self.object.title, 'text': self.object.text,
                                                        'author': self.object.author, 'tags': None })
