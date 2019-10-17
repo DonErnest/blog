@@ -5,12 +5,11 @@ from django.urls import reverse
 from django.utils.http import urlencode
 
 from webapp.forms import ArticleForm, CommentForm, ArticleCommentForm, SimpleSearchForm
-from webapp.models import Article
+from webapp.models import Article, Tag
 
-from django.views.generic import View, RedirectView, ListView, DetailView
+from django.views.generic import View, RedirectView, ListView, DetailView, CreateView, UpdateView
 from django.views.generic import TemplateView
 
-from webapp.views.base_classes import CreateView
 
 
 class IndexView(ListView):
@@ -36,6 +35,7 @@ class IndexView(ListView):
             queryset = queryset.filter(
                 Q(title__icontains=self.search_value)
                 | Q(author__icontains=self.search_value)
+                | Q(tags__name__iexact=self.search_value)
             )
         return queryset
 
@@ -70,6 +70,7 @@ class ArticleView(DetailView):
         context = super().get_context_data(**kwargs)
         article = self.object
         comments = article.comments.filter(article_id=article.pk).order_by('-created_at')
+        tags = article.tags.all()
         context['form'] = ArticleCommentForm()
         paginator = Paginator(comments, 3, 0)
         page_number = self.request.GET.get('page', 1)
@@ -78,6 +79,7 @@ class ArticleView(DetailView):
         context['page_obj'] = page
         context['comments'] = page.object_list
         context['is_paginated'] = page.has_other_pages()
+        context['tags'] = tags
         return context
 
 
@@ -86,31 +88,93 @@ class ArticleCreateView(CreateView):
     model = Article
     template_name = 'article/article_create.html'
 
-    def get_redirect_url(self):
+
+    def get_success_url(self):
         return reverse('article_view', kwargs= {'pk': self.object.pk})
 
-class ArtUpdateView(View):
-    def get(self, request, *args, **kwargs):
-        pk = kwargs.get('pk')
-        article = get_object_or_404(Article, pk=pk)
-        form = ArticleForm(data={'title': article.title, 'text': article.text, 'author': article.author})
-        return render(request, 'article/article_update_view.html', context={'form': form, 'article': article})
+    def get_tags(self, form):
+        tags = form.cleaned_data['tags'].split(',')
+        tag_queryset = []
+        for tag in tags:
+            if tag.strip() == None:
+                tag.remove()
+            Tag.objects.get_or_create(name=tag)
+            tag_queryset.append(Tag.objects.get(name=tag))
+        return tag_queryset
 
-    def post(self, request, *args, **kwargs):
-        pk = kwargs.get('pk')
-        article = get_object_or_404(Article, pk=pk)
-        form = ArticleForm(data=request.POST)
-        if form.is_valid():
-            article.title = form.cleaned_data['title']
-            article.text = form.cleaned_data['text']
-            article.author = form.cleaned_data['author']
-            print(article.title, article.text, article.author)
-            article.save()
-            return redirect('article_view', pk=article.pk)
-        else:
-            return render(request, 'article/article_update_view.html', context={
-                'form': form, 'article': article
-            })
+    def form_valid(self, form):
+        tags = self.get_tags(form)
+        form.cleaned_data.pop('tags')
+        self.object = form.save()
+        self.object.tags.add(*tags)
+        self.object.save()
+        return super().form_valid(form)
+
+
+class ArtUpdateView(UpdateView):
+    form_class = ArticleForm
+    model = Article
+    template_name = 'article/article_update_view.html'
+
+    def get_success_url(self):
+        return reverse('article_view', kwargs= {'pk': self.object.pk})
+
+    def get_tags(self, form):
+        tags = form.cleaned_data['tags'].split(',')
+        tag_queryset = []
+        for tag in tags:
+            if tag.strip() == None:
+                tag.remove()
+            Tag.objects.get_or_create(name=tag)
+            tag_queryset.append(Tag.objects.get(name=tag))
+        print(tag_queryset)
+        return tag_queryset
+
+    def get_tag_list(self):
+        tag_list = Tag.objects.filter(articles__title=self.object.title)
+        return tag_list
+
+    def form_valid(self, form):
+        tags = self.get_tags(form)
+        form.cleaned_data.pop('tags')
+        self.object = form.save()
+        self.object.tags.add(*tags)
+        self.object.save()
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        if 'form' not in kwargs:
+            kwargs['form'] = self.get_form()
+            if self.get_tag_list():
+                kwargs['form'] = self.form_class(data={'title': self.object.title, 'text': self.object.text,
+                                                   'author': self.object.author, 'tags': self.get_tag_list()})
+            else:
+                kwargs['form'] = self.form_class(data={'title': self.object.title, 'text': self.object.text,
+                                                       'author': self.object.author, 'tags': None })
+        return super().get_context_data(**kwargs)
+
+
+    # def get(self, request, *args, **kwargs):
+    #     pk = kwargs.get('pk')
+    #     article = get_object_or_404(Article, pk=pk)
+    #     form = ArticleForm(data={'title': article.title, 'text': article.text, 'author': article.author})
+    #     return render(request, 'article/article_update_view.html', context={'form': form, 'article': article})
+    #
+    # def post(self, request, *args, **kwargs):
+    #     pk = kwargs.get('pk')
+    #     article = get_object_or_404(Article, pk=pk)
+    #     form = ArticleForm(data=request.POST)
+    #     if form.is_valid():
+    #         article.title = form.cleaned_data['title']
+    #         article.text = form.cleaned_data['text']
+    #         article.author = form.cleaned_data['author']
+    #         print(article.title, article.text, article.author)
+    #         article.save()
+    #         return redirect('article_view', pk=article.pk)
+    #     else:
+    #         return render(request, 'article/article_update_view.html', context={
+    #             'form': form, 'article': article
+    #         })
 
 
 class ArtDeleteView(View):
