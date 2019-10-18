@@ -16,7 +16,7 @@
             <p class="font-italic">Created at {{ article.created_at }}</p>
             <p><strong>Теги: </strong>
                 {% for tag in tags %}
-                    <a href="/">{{ tag.name }}</a>
+                    <a href="/?search={{ tag.name }}&search_field=tags">{{ tag.name }}</a>
                 {% endfor %}
             </p>
             <a href="{% url 'article_update' article.pk %}" class="card-link btn btn-success">Update</a>

@@ -17,7 +17,6 @@ class CommentAddView(CreateView):
 
     def get_success_url(self):
         return reverse('article_view', kwargs={'pk': self.object.article.pk})
-    # success_url = '/comments/'
 
 
     def post(self, request, *args, **kwargs):

@@ -4,12 +4,11 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.utils.http import urlencode
 
-from webapp.forms import ArticleForm, CommentForm, ArticleCommentForm, SimpleSearchForm
+from webapp.forms import ArticleForm, CommentForm, ArticleCommentForm, SimpleSearchForm, SEARCH_CHOICE_DEFAULT, \
+    SEARCH_CHOICE_TAG
 from webapp.models import Article, Tag
 
 from django.views.generic import View, RedirectView, ListView, DetailView, CreateView, UpdateView
-from django.views.generic import TemplateView
-
 
 
 class IndexView(ListView):
@@ -32,11 +31,15 @@ class IndexView(ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         if self.search_value:
-            queryset = queryset.filter(
-                Q(title__icontains=self.search_value)
-                | Q(author__icontains=self.search_value)
-                | Q(tags__name__iexact=self.search_value)
-            )
+            if self.search_value['search_field'] == SEARCH_CHOICE_DEFAULT:
+                queryset = queryset.filter(
+                    Q(title__icontains=self.search_value['search'])
+                    | Q(author__icontains=self.search_value['search'])
+                ).distinct()
+            elif self.search_value['search_field'] == SEARCH_CHOICE_TAG:
+                queryset = queryset.filter(
+                    Q(tags__name__iexact=self.search_value['search'])
+                )
         return queryset
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -51,7 +54,8 @@ class IndexView(ListView):
 
     def get_search_value(self):
         if self.form.is_valid():
-            return self.form.cleaned_data['search']
+            search = {'search': self.form.cleaned_data['search'], 'search_field': self.form.cleaned_data['search_field'] }
+            return search
         return None
 
 
@@ -96,8 +100,8 @@ class ArticleCreateView(CreateView):
         tags = form.cleaned_data['tags'].split(',')
         tag_queryset = []
         for tag in tags:
-            if tag.strip() == None:
-                tag.remove()
+            if tag.strip() == "":
+                tags.remove(tag)
             Tag.objects.get_or_create(name=tag)
             tag_queryset.append(Tag.objects.get(name=tag))
         return tag_queryset
@@ -123,11 +127,10 @@ class ArtUpdateView(UpdateView):
         tags = form.cleaned_data['tags'].split(',')
         tag_queryset = []
         for tag in tags:
-            if tag.strip() == None:
-                tag.remove()
+            if tag.strip() == "":
+                tags.remove(tag)
             Tag.objects.get_or_create(name=tag)
             tag_queryset.append(Tag.objects.get(name=tag))
-        print(tag_queryset)
         return tag_queryset
 
     def get_tag_list(self):
@@ -139,10 +142,10 @@ class ArtUpdateView(UpdateView):
         return tags
 
     def form_valid(self, form):
-        self.object.tags.clear()
         tags = self.get_tags(form)
         form.cleaned_data.pop('tags')
         self.object = form.save()
+        self.object.tags.clear()
         self.object.tags.add(*tags)
         self.object.save()
         return super().form_valid(form)
@@ -158,29 +161,6 @@ class ArtUpdateView(UpdateView):
                 kwargs['form'] = self.form_class(data={'title': self.object.title, 'text': self.object.text,
                                                        'author': self.object.author, 'tags': None })
         return super().get_context_data(**kwargs)
-
-
-    # def get(self, request, *args, **kwargs):
-    #     pk = kwargs.get('pk')
-    #     article = get_object_or_404(Article, pk=pk)
-    #     form = ArticleForm(data={'title': article.title, 'text': article.text, 'author': article.author})
-    #     return render(request, 'article/article_update_view.html', context={'form': form, 'article': article})
-    #
-    # def post(self, request, *args, **kwargs):
-    #     pk = kwargs.get('pk')
-    #     article = get_object_or_404(Article, pk=pk)
-    #     form = ArticleForm(data=request.POST)
-    #     if form.is_valid():
-    #         article.title = form.cleaned_data['title']
-    #         article.text = form.cleaned_data['text']
-    #         article.author = form.cleaned_data['author']
-    #         print(article.title, article.text, article.author)
-    #         article.save()
-    #         return redirect('article_view', pk=article.pk)
-    #     else:
-    #         return render(request, 'article/article_update_view.html', context={
-    #             'form': form, 'article': article
-    #         })
 
 
 class ArtDeleteView(View):
