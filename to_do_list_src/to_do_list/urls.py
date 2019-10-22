@@ -5,6 +5,7 @@ from django.urls import path
 from webapp.views import IndexView, ArticleView, ArticleCreateView, \
     IndexRedirectView, ArtUpdateView, ArtDeleteView, CommentAddView, CommentListView, CommentEditView, \
     CommentDeleteView, CommentToArticleView
+from webapp.views.search_view import SearchView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -18,5 +19,6 @@ urlpatterns = [
     path('comments/', CommentListView.as_view(), name='comments list'),
     path('comment/<int:pk>/edit/', CommentEditView.as_view(), name='edit comment'),
     path('comment/<int:pk>/', CommentDeleteView.as_view(), name='delete comment'),
-    path('article/<int:pk>/comment/add/', CommentToArticleView.as_view(), name='add comment to article')
+    path('article/<int:pk>/comment/add/', CommentToArticleView.as_view(), name='add comment to article'),
+    path('search/', SearchView.as_view(), name='advanced search')
 ]

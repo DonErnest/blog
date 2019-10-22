@@ -1,12 +1,19 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from django.forms import widgets
 
 from webapp.models import Comment, Article, Tag
 
-SEARCH_CHOICE_DEFAULT = 'title_author'
-SEARCH_CHOICE_TAG = 'tags'
-SEARCH_CHOICES= [(SEARCH_CHOICE_DEFAULT, 'по названию или автору'),(SEARCH_CHOICE_TAG, 'по тегам')]
+CHOICE_DEFAULT = 'title'
+CHOICE_TAG = 'tags'
+CHOICE_TEXT = 'text'
+CHOICE_COMMENTS = 'comments'
 
+SEARCH_CHOICES= [(CHOICE_DEFAULT, 'по названию'),(CHOICE_TAG, 'по тегам'),
+                  (CHOICE_TEXT,'по содержанию'), (CHOICE_COMMENTS,'по комментариям')]
+AUTHOR_CHOICE_DEFAULT = 'articles'
+AUTHOR_COMMENT = 'comments'
+AUTHOR_CHOICES = [(AUTHOR_CHOICE_DEFAULT, 'по автору статьи'),(AUTHOR_COMMENT, 'по автору комментария')]
 
 class ArticleForm(forms.ModelForm):
     tags = forms.CharField(max_length=500, label='Теги', required=False)
@@ -14,17 +21,6 @@ class ArticleForm(forms.ModelForm):
     class Meta:
         model=Article
         exclude=['created_at', 'updated_at']
-
-    # def clean_tags(self):
-    #     tag_queryset = []
-    #     print("These are tags", self.cleaned_data['tags'])
-    #     tags = self.cleaned_data['tags']
-    #     for tag in tags:
-    #         if tag.strip() == "":
-    #             tags.remove(tag)
-    #         Tag.objects.get_or_create(name=tag)
-    #         tag_queryset.append(Tag.objects.get(name=tag))
-    #     return tag_queryset
 
 
 class CommentForm(forms.ModelForm):
@@ -40,7 +36,32 @@ class ArticleCommentForm(forms.ModelForm):
         fields=['author', 'text']
         labels={'text': 'Комментарий', 'author': 'Автор'}
 
-class SimpleSearchForm(forms.Form):
-    search = forms.CharField(max_length=100, required=False, label='Поиск')
-    search_field = forms.ChoiceField(choices=SEARCH_CHOICES)
-    
+class SearchForm(forms.Form):
+    search_text = forms.CharField(max_length=100, required=False, label='Текст')
+    search_text_choices = forms.MultipleChoiceField(choices=SEARCH_CHOICES, initial=[c[0] for c in SEARCH_CHOICES[:-1]],
+                                            required=False,
+                                            widget=forms.CheckboxSelectMultiple(choices=SEARCH_CHOICES))
+    search_author = forms.CharField(max_length=40, required=False, label='Автор')
+    search_author_choices = forms.MultipleChoiceField(choices=AUTHOR_CHOICES, initial=AUTHOR_CHOICE_DEFAULT,
+                                              required=False,
+                                              widget=forms.CheckboxSelectMultiple(choices=(AUTHOR_CHOICES)))
+
+    def clean(self):
+        cleaned_data = super(SearchForm, self).clean()
+        if cleaned_data['search_text']=='' and cleaned_data['search_author']=='':
+            raise ValidationError('Хотя бы одно из полей поиска должно быть заполнено!')
+        return cleaned_data
+
+    def clean_search_text_choices(self):
+        search_text = self.cleaned_data['search_text']
+        search_text_choices = self.cleaned_data['search_text_choices']
+        if search_text and not search_text_choices:
+            raise ValidationError('Нужно поставить хотя бы одну галочку при поиске по тексту!')
+        return search_text_choices
+
+    def clean_search_author_choices(self):
+        search_author = self.cleaned_data['search_author']
+        search_author_choices = self.cleaned_data['search_author_choices']
+        if search_author and not search_author_choices:
+            raise ValidationError('Нужно поставить хотя бы одну галочку при поиске по автору!')
+        return search_author_choices

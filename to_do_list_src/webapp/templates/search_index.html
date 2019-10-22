@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block menu %}
+{% endblock %}
+
+
+{% block title %} Результаты поиска {% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <form class="pt-3 pb-3 form-inline" action="" method="POST">
+            {% include 'partial/search_form.html' %}
+        </form>
+    </div>
+    <div class="d-flex justify-content-center">
+        {% include 'partial/pagination.html' %}
+    </div>
+    {% include 'partial/articles_list.html' %}
+    <div class="d-flex justify-content-center">
+        {% include 'partial/pagination.html' %}
+    </div>
+{% endblock %}

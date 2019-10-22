@@ -1,9 +1,52 @@
-<form class="text-center" action="" method="GET">
-    <label for="{{ form.search.id_for_label }}">{{ form.search.label }}:</label>
-    {{ form.search }}
-    {{ form.search_field }}
-    <input type="submit" value="search">
-    {% for error in form.search.errors %}
+{% load widget_tweaks %}
+{% csrf_token %}
+
+<div class="form-group">
+    {% for error in form.non_field_errors %}
         <p class="form-error">{{ error }}</p>
     {% endfor %}
-</form>
+    <label for="{{ form.search_text.id_for_label }}">{{ form.search_text.label }}:</label>
+    {% if form.search_text.errors %}
+        {{ form.search_text|add_class:'mr-5 field-error' }}
+    {% else %}
+        {{ form.search_text|add_class:'mr-5' }}
+    {% endif %}
+
+
+    {% for error in form.search_text.errors %}
+        <p class="form-error">{{ error }}</p>
+    {% endfor %}
+
+    {% if form.search_text_choices.errors %}
+        {{ form.search_text_choices|add_class:'field-error' }}
+    {% else %}
+        {{ form.search_text_choices }}
+    {% endif %}
+    {% for error in form.search_text_choices.errors %}
+        <p class="form-error">{{ error }}</p>
+    {% endfor %}
+</div>
+
+<div class="form-group">
+    <label for="{{ form.search_author.id_for_label }}">{{ form.search_author.label }}:</label>
+    {% if form.search_author.errors %}
+        {{ form.search_author|add_class:'mr-5 field-error' }}
+    {% else %}
+        {{ form.search_author|add_class:'mr-5' }}
+    {% endif %}
+    {% for error in form.search_author.errors %}
+        <p class="form-error">{{ error }}</p>
+    {% endfor %}
+
+    {% if form.search_author_choices.errors %}
+        {{ form.search_author_choices|add_class:'field-error' }}
+    {% else %}
+        {{ form.search_author_choices|add_class:'' }}
+    {% endif %}
+
+    {% for error in form.search_author_choices.errors %}
+        <p class="form-error">{{ error }}</p>
+    {% endfor %}
+</div>
+
+<input type="submit" value="search">
