@@ -8,7 +8,7 @@
         <h1 class = "align-self-center pt-3">Edit comment</h1>
         <div class="article w-50 align-self-center mb-3">
             <form method="POST" action="{% url 'edit comment' comment.pk %}" class="pt-3">
-                {% include 'partial/article_form.html' with button_text='Edit'%}
+                {% include 'partial/form.html' with button_text='Edit'%}
             </form>
         </div>
     </div>

@@ -3,7 +3,7 @@
 {% block content %}
     <div class = "d-flex justify-content-center pt-5 pb-5">
         <form action="{% url 'add comment' %}" method="POST" class = "w-50 pt-3 pb-3">
-            {% include 'partial/article_form.html' with button_text="Add" %}
+            {% include 'partial/form.html' with button_text="Add" %}
         </form>
     </div>
 {% endblock %}

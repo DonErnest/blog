@@ -1,11 +1,13 @@
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
+from to_do_list import settings
 from webapp.views import IndexView, ArticleView, ArticleCreateView, \
     IndexRedirectView, ArtUpdateView, ArtDeleteView, CommentAddView, CommentListView, CommentEditView, \
     CommentDeleteView, CommentToArticleView
 from webapp.views.search_view import SearchView
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -20,5 +22,8 @@ urlpatterns = [
     path('comment/<int:pk>/edit/', CommentEditView.as_view(), name='edit comment'),
     path('comment/<int:pk>/', CommentDeleteView.as_view(), name='delete comment'),
     path('article/<int:pk>/comment/add/', CommentToArticleView.as_view(), name='add comment to article'),
-    path('search/', SearchView.as_view(), name='advanced search')
+    path('search/', SearchView.as_view(), name='advanced search'),
+    path('accounts/', include('accounts.urls'))
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

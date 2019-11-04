@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
@@ -88,7 +89,7 @@ class ArticleView(DetailView):
         return context
 
 
-class ArticleCreateView(CreateView):
+class ArticleCreateView(LoginRequiredMixin, CreateView):
     form_class = ArticleForm
     model = Article
     template_name = 'article/article_create.html'
@@ -116,7 +117,7 @@ class ArticleCreateView(CreateView):
         return super().form_valid(form)
 
 
-class ArtUpdateView(UpdateView):
+class ArtUpdateView(LoginRequiredMixin, UpdateView):
     form_class = ArticleForm
     model = Article
     template_name = 'article/article_update_view.html'
@@ -164,7 +165,7 @@ class ArtUpdateView(UpdateView):
         return super().get_context_data(**kwargs)
 
 
-class ArtDeleteView(View):
+class ArtDeleteView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         pk = kwargs.get('pk')
         article = get_object_or_404(Article, pk=pk)
