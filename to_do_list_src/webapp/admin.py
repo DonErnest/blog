@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from webapp.models import Article, Comment, Tag
 
-AUTHOR=['author']
+AUTHOR=[] # - для удобства проверки отображения и записи авторов
 USERAUTHOR = ['user_author']
 
 class CommentAdmin(admin.ModelAdmin):

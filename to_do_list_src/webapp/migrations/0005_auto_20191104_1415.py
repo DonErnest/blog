@@ -16,12 +16,13 @@ def create_authors(apps, schema_editor):
 
     for article in Article.objects.all():
         author_name = ''.join(e for e in article.author if e.isalnum())
-        if len(author_name) > 1:
+        if len(author_name) > 1: # - транслитерация не работает для строк длиной в один символ
             if has_cyrillic(author_name):
                     translit_author_name = translit(author_name, reversed=True)
                     user, created = User.objects.get_or_create(username=translit_author_name)
                     if created:
-                        # user.set_password(translit_author_name.upper())
+                        # user.set_password(translit_author_name.upper()) - миграция не может распознать функцию задать пароль от модели пользователя,
+                        # в StackOverflow пишут, что это из-за наследования
                         user.save()
                         article.user_author = user
                         article.save()
