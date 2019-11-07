@@ -5,6 +5,13 @@
     <li class="nav-link"><a href="{% url 'add comment' %}">Add Comment</a></li>
     <li class="nav-link"><a href="{% url 'comments list' %}">See all comments</a></li>
     <li class="nav-link"><a href="{% url 'advanced search' %}">Search</a></li>
+    <li class="nav-link"><a href="{% url 'advanced search' %}">Search</a></li>
+    {% if not request.user.is_authenticated %}
+        <li class="nav-link"><a href="{% url 'accounts:register' %}">Register</a></li>
+        <li class="nav-link"><a href="{% url 'accounts:login' %}">Login</a></li>
+    {% else %}
+        <li class="nav-link"><a href="{% url 'accounts:user_detail' request.user.pk %}">Cabinet</a></li>
+    {% endif %}
 {% endblock %}
 
 {% block content %}

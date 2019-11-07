@@ -29,6 +29,8 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'webapp',
     'accounts',
+    'transliterate',
+    'random_username'
 ]
 
 MIDDLEWARE = [
@@ -119,3 +121,5 @@ HOST_NAME = 'localhost:8000'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 MEDIA_URL = '/media/'
+
+from accounts.settings_local import *

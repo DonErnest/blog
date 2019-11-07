@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
+{% block title %}
+    Registration
+{% endblock %}
 {% block content %}
-    <h1>Sign Up</h1>
-    <form method="post" action="{% url 'accounts:register' %}" class="text-center">
-        {% include 'partial/form.html' with button_text='Register' %}
-    </form>
+    <div class="d-flex flex-column">
+        <h1 class="text-center">Sign Up</h1>
+        <form method="post" action="{% url 'accounts:register' %}" class="align-self-center w-50">
+            {% include 'partial/form.html' with button_text='Register' %}
+        </form>
+    </div>
+
 {% endblock %}

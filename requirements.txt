@@ -3,4 +3,7 @@ django-widget-tweaks==1.4.5
 Pillow==6.2.1
 pkg-resources==0.0.0
 pytz==2019.2
+random-username==1.0.2
+six==1.12.0
 sqlparse==0.3.0
+transliterate==1.10.2

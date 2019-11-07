@@ -5,8 +5,7 @@ from django.urls import path, include
 from to_do_list import settings
 from webapp.views import IndexView, ArticleView, ArticleCreateView, \
     IndexRedirectView, ArtUpdateView, ArtDeleteView, CommentAddView, CommentListView, CommentEditView, \
-    CommentDeleteView, CommentToArticleView
-from webapp.views.search_view import SearchView
+    CommentDeleteView, CommentToArticleView, SearchView
 from django.conf.urls.static import static
 
 urlpatterns = [
@@ -22,7 +21,10 @@ urlpatterns = [
     path('comment/<int:pk>/edit/', CommentEditView.as_view(), name='edit comment'),
     path('comment/<int:pk>/', CommentDeleteView.as_view(), name='delete comment'),
     path('article/<int:pk>/comment/add/', CommentToArticleView.as_view(), name='add comment to article'),
+
     path('search/', SearchView.as_view(), name='advanced search'),
+    # path('search/results', SearchResultsView.as_view(), name='advanced search results'),
+
     path('accounts/', include('accounts.urls'))
 ]
 

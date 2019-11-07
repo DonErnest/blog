@@ -1,48 +1,11 @@
 [
 {
-  "model": "auth.user",
-  "pk": 1,
-  "fields": {
-    "password": "pbkdf2_sha256$150000$X4niv1F51evx$SIVXNUhDGeKzPVrammcq6lRlUuvLkfZSJtDpch+lq4s=",
-    "last_login": "2019-11-07T06:39:18.755Z",
-    "is_superuser": true,
-    "username": "ernest_aitiev",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": true,
-    "is_active": true,
-    "date_joined": "2019-09-05T04:39:04.001Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 2,
-  "fields": {
-    "password": "pbkdf2_sha256$150000$QR5f4LNMYkub$84sGKMhLdtBdEM2h0BTjc5/8i1Bkl5cAaTYeuDnOpPk=",
-    "last_login": "2019-11-07T05:58:19.147Z",
-    "is_superuser": false,
-    "username": "Ibrahim",
-    "first_name": "Ibrahim",
-    "last_name": "",
-    "email": "ibra@yahoo.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2019-11-07T05:57:08.925Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
   "model": "webapp.article",
   "pk": 4,
   "fields": {
     "title": "studying PK parameters and git",
     "text": "Now I try to figure out how pk works if all articles are deleted. Now I try to not to lose the points",
     "author": "Bob Marley",
-    "user_author": 1,
     "created_at": "2019-09-05T05:21:10.986Z",
     "updated_at": "2019-10-01T08:18:11.887Z",
     "tags": []
@@ -53,11 +16,10 @@
   "pk": 5,
   "fields": {
     "title": "The most important imperial stuff",
-    "text": "To be or not to be,\r\nthat's the question.\r\nwhether tis nobler in the mind to suffer",
-    "author": "\u0414\u0430\u0440\u0442\u0412\u0435\u0439\u0434\u0435\u0440",
-    "user_author": 1,
+    "text": "To be or not to be,\r\nthat's the question.\r\nwhether tis nobler in the mind to suffer ",
+    "author": "",
     "created_at": "2019-09-06T14:52:33.071Z",
-    "updated_at": "2019-11-07T06:41:45.816Z",
+    "updated_at": "2019-09-10T13:53:41.902Z",
     "tags": []
   }
 },
@@ -68,7 +30,6 @@
     "title": "\u0423\u0432\u043b\u0435\u043a\u0430\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u043f\u0443\u0442\u0435\u0448\u0435\u0441\u0442\u0432\u0438\u044f \u0432 \u0414\u0436\u0430\u043d\u0433\u043e",
     "text": "\u041d\u0443, \u044f \u043a\u043e\u043d\u0435\u0447\u043d\u043e \u043f\u0440\u0438\u0432\u0440\u0430\u043b, \r\n\u043e\u043d\u0438 \u043d\u0435 \u0443\u0432\u043b\u0435\u043a\u0430\u0442\u0435\u043b\u044c\u043d\u044b\u0435, \r\n\u043d\u043e \u0437\u0430\u0431\u0430\u0432\u043d\u044b\u0435",
     "author": "\u042f",
-    "user_author": 1,
     "created_at": "2019-09-10T15:09:35.127Z",
     "updated_at": "2019-09-10T15:09:35.127Z",
     "tags": []
@@ -81,7 +42,6 @@
     "title": "\u041a\u043e\u043c\u043c\u0435\u043d\u0442\u044b \u043a \u0441\u0442\u0430\u0442\u044c\u0435",
     "text": "\u0432 \u044d\u0442\u043e\u0439 \u0441\u0442\u0430\u0442\u044c\u0435 \u043c\u044b \u0440\u0430\u0441\u0441\u043a\u0430\u0436\u0435\u043c, \u043a\u0430\u043a \u043a \u0441\u0442\u0430\u0442\u044c\u044f\u043c \u043f\u0440\u0438\u043f\u0438\u043b\u0438\u0442\u044c \u043a\u043e\u043c\u043c\u0435\u043d\u0442\u0430\u0440\u0438\u0438. \u0410 \u043f\u043e\u0442\u043e\u043c \u043e\u0442\u043f\u0438\u043b\u0438\u0442\u044c \u043a\u043e\u043c\u043c\u0435\u043d\u0442\u0430\u0440\u0438\u0438 \u0438 \u0441\u0434\u0435\u043b\u0430\u0442\u044c \u0432\u0438\u0434, \u0447\u0442\u043e \u0438\u0445 \u043d\u0438\u043a\u043e\u0433\u0434\u0430 \u043d\u0435 \u0431\u044b\u043b\u043e. \r\n\u0412\u0440\u043e\u0434\u0435 , \u043f\u043e\u043b\u0443\u0447\u0430\u0435\u0442\u0441\u044f",
     "author": "\u0412\u0430\u0441\u044f \u041f\u0443\u043f\u043a\u0438\u043d",
-    "user_author": 1,
     "created_at": "2019-09-24T13:35:59.804Z",
     "updated_at": "2019-10-01T08:23:05.529Z",
     "tags": []
@@ -94,7 +54,6 @@
     "title": "\u041f\u044b\u0442\u0430\u044e\u0441\u044c \u0441\u043e\u0441\u0442\u0430\u0432\u0438\u0442\u044c \u043d\u043e\u0440\u043c\u0430\u043b\u044c\u043d\u044b\u0435 \u043a\u043e\u043c\u043c\u0438\u0442\u044b",
     "text": "\u0441\u043d\u043e\u0448\u0443 \u043f\u0440\u043e\u0435\u043a\u0442 \u0438 \u043f\u043e\u044d\u0442\u0430\u043f\u043d\u043e \u0432\u044b\u0441\u0442\u0430\u0432\u043b\u044f\u044e \u0432 \u043d\u0435\u0433\u043e \u0432\u0441\u0451, \u0447\u0442\u043e \u043d\u0430\u0434\u0435\u043b\u0430\u043b \u0437\u0430 \u043f\u0430\u0440\u0443 \u0434\u043d\u0435\u0439\r\n\r\n\u041f\u043e\u043f\u0443\u0442\u043d\u043e \u043f\u0440\u043e\u0432\u0435\u0440\u044f\u044e, \u043a\u0430\u043a \u0432\u0441\u0451 \u0440\u0430\u0431\u043e\u0442\u0430\u0435\u0442",
     "author": "\u042f",
-    "user_author": 1,
     "created_at": "2019-10-01T08:29:28.127Z",
     "updated_at": "2019-10-01T08:29:51.559Z",
     "tags": []
@@ -107,7 +66,6 @@
     "title": "\u041a\u0430\u043a \u0443\u043f\u0440\u0430\u0432\u043b\u044f\u0442\u044c \u043c\u0438\u0440\u043e\u043c \u043f\u0440\u044f\u043c\u043e \u0438\u0437 \u043f\u0430\u043b\u0430\u0442\u044b",
     "text": "\u043d\u0430 \u0441\u0430\u043c\u043e\u043c \u0434\u0435\u043b\u0435, \u044d\u0442\u043e \u0434\u043e\u0441\u0442\u0430\u0442\u043e\u0447\u043d\u043e \u043f\u0440\u043e\u0441\u0442\u043e.\r\n\u041d\u0430\u0434\u043e \u0432\u0441\u0435\u0433\u043e \u043b\u0438\u0448\u044c \u0437\u0430\u0445\u043e\u0442\u0435\u0442\u044c.\r\n\u0418 \u043d\u0435 \u043f\u0440\u0438\u043d\u0438\u043c\u0430\u0442\u044c \u0433\u0430\u043b\u043e\u043f\u0435\u0440\u0438\u0434\u043e\u043b",
     "author": "\u041d\u0430\u043f\u043e\u043b\u0435\u043e\u043d \u0411\u043e\u043d\u0430\u043f\u0430\u0440\u0442",
-    "user_author": 1,
     "created_at": "2019-10-01T11:50:56.721Z",
     "updated_at": "2019-10-01T11:52:28.249Z",
     "tags": []
@@ -120,7 +78,6 @@
     "title": "\u0414\u043e\u0431\u0430\u0432\u043b\u044f\u0435\u043c \u043f\u0430\u0433\u0438\u043d\u0430\u0442\u043e\u0440",
     "text": "\u0441\u0435\u0433\u043e\u0434\u043d\u044f \u043c\u044b \u043d\u0430\u043a\u043e\u043d\u0435\u0446-\u0442\u043e \u043e\u0444\u0438\u0446\u0438\u0430\u043b\u044c\u043d\u043e \u0443\u0437\u043d\u0430\u043b\u0438, \u0447\u0442\u043e \u0435\u0441\u0442\u044c \u0433\u0435\u043d\u0435\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u043d\u044b\u0435 \u043a\u043b\u0430\u0441\u0441\u044b \u0434\u0436\u0430\u043d\u0433\u043e \u0441 \u0442\u0430\u043a\u0438\u043c\u0438 \u0444\u0443\u043d\u043a\u0446\u0438\u044f\u043c\u0438, \u043a\u0430\u043a \u043f\u0430\u0433\u0438\u043d\u0430\u0442\u043e\u0440",
     "author": "\u044f",
-    "user_author": 1,
     "created_at": "2019-10-01T14:33:30.278Z",
     "updated_at": "2019-10-01T14:33:30.279Z",
     "tags": []
@@ -133,7 +90,6 @@
     "title": "\u041f\u044b\u0442\u0430\u044e\u0441\u044c \u0434\u043e\u0431\u0438\u0442\u044c\u0441\u044f \u043e\u0442\u0432\u0430\u043b\u0430 \u0441\u0442\u0430\u0442\u0435\u0439",
     "text": "\u043f\u044b\u0442\u0430\u044e\u0441\u044c \u0434\u043e\u0431\u0438\u0442\u044c\u0441\u044f \u0442\u043e\u0433\u043e. \u0447\u0442\u043e\u0431\u044b \u043b\u0438\u0448\u043d\u0438\u0435 \u0441\u0442\u0430\u0442\u044c\u0438 \u043e\u0442\u0432\u0430\u043b\u0438\u043b\u0438\u0441\u044c \u0441 \u043f\u0435\u0440\u0432\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u044b",
     "author": "\u044f",
-    "user_author": 1,
     "created_at": "2019-10-01T14:35:39.334Z",
     "updated_at": "2019-10-01T14:35:39.334Z",
     "tags": []
@@ -146,7 +102,6 @@
     "title": "\u0421\u043e\u0437\u0434\u0430\u0435\u043c \u0441\u0442\u0430\u0442\u044c\u044e",
     "text": "\u0416\u044b\u0432\u0442\u043e\u043d\u0435 \u0447\u043e\u0447\u043e \u0443\u043f\u044f\u0447\u043a\u0430",
     "author": "\u041f\u043d\u0451",
-    "user_author": 1,
     "created_at": "2019-10-04T14:35:33.699Z",
     "updated_at": "2019-10-17T16:25:48.069Z",
     "tags": []
@@ -158,10 +113,9 @@
   "fields": {
     "title": "\u0418\u0437\u0443\u0447\u0430\u0435\u043c \u0434\u0436\u0430\u043d\u0433\u043e",
     "text": "\u0431\u043b\u0430 \u0431\u043b\u0430 \u0431\u043b\u0430 \u0431\u043b\u0430",
-    "author": "\u0414\u0436\u0430\u043d\u0433\u043e\u0410\u043a\u043e\u043b\u0438\u0442",
-    "user_author": 1,
+    "author": "Unknown",
     "created_at": "2019-10-15T14:38:34.743Z",
-    "updated_at": "2019-11-07T06:41:20.878Z",
+    "updated_at": "2019-10-17T12:27:34.415Z",
     "tags": [
       1,
       3,
@@ -176,7 +130,6 @@
     "title": "\u041f\u0440\u0438\u043f\u0438\u043b\u0438\u0432\u0430\u0435\u043c \u0442\u0435\u0433\u0438",
     "text": "\u0442\u0435\u043f\u0435\u0440\u044c \u043d\u0430\u0434\u043e \u0432 \u043d\u0430\u0448 \u043c\u043d\u043e\u0433\u043e\u0441\u0442\u0440\u0430\u0434\u0430\u043b\u044c\u043d\u044b\u0439 \u0431\u043b\u043e\u0433 \u043f\u0440\u0438\u043f\u0438\u043b\u0438\u0442\u044c \u0442\u0435\u0433\u0438",
     "author": "Unknown",
-    "user_author": 1,
     "created_at": "2019-10-17T06:51:47.813Z",
     "updated_at": "2019-10-17T12:25:27.916Z",
     "tags": [
@@ -190,10 +143,9 @@
   "fields": {
     "title": "\u0421\u043c\u043e\u0442\u0440\u0438, \u043a\u0430\u043a \u044f \u043c\u043e\u0433\u0443",
     "text": "\u0432\u0440\u043e\u0434\u0435 \u0431\u044b , \u0434\u043e\u0431\u0430\u0432\u043b\u0435\u043d\u0438\u0435 \u0442\u0435\u0433\u043e\u0432 \u043a \u043d\u043e\u0432\u043e\u0439 \u0441\u0442\u0430\u0442\u044c\u0435 \u0434\u043e\u043b\u0436\u043d\u043e \u0440\u0430\u0431\u043e\u0442\u0430\u0442\u044c.\r\n\u0422\u0435\u043f\u0435\u0440\u044c...",
-    "author": "\u041f\u043e\u043d\u0442\u043e\u0440\u0435\u0437",
-    "user_author": 1,
+    "author": "Unknown",
     "created_at": "2019-10-17T12:39:05.171Z",
-    "updated_at": "2019-11-07T06:41:09.608Z",
+    "updated_at": "2019-10-17T16:31:41.344Z",
     "tags": []
   }
 },
@@ -204,7 +156,6 @@
     "title": "\u0414\u0436\u0430\u043d\u0433\u043e \u043f\u0440\u0430\u0439\u0434",
     "text": "\u044d\u044d\u044d\u044d\u044d , \u043f\u043e\u043b\u0443\u0447\u0438\u043b\u043e\u0441\u044c \u0437\u0430\u043f\u0438\u043b\u0438\u0442\u044c \u0442\u0435\u0433\u0438",
     "author": "Unknown",
-    "user_author": 1,
     "created_at": "2019-10-17T13:06:34.468Z",
     "updated_at": "2019-10-17T16:36:35.067Z",
     "tags": [
@@ -220,10 +171,9 @@
   "fields": {
     "title": "\u0422\u0435\u0433\u0438 \u0443\u043f\u0430\u043b\u0438",
     "text": "\u0442\u0435\u0433\u0438 \u0441\u0442\u043e\u044f\u043b\u0438 \u0441\u0442\u043e\u044f\u043b\u0438 \u0438 \u0442\u0443\u0442 \u0440\u0443\u0445\u043d\u0443\u043b\u0438. \u041d\u0435\u043f\u043e\u0440\u044f\u0434\u043e\u043a",
-    "author": "\u0420\u0430\u043a\u0422\u0435\u0433\u043e\u0432",
-    "user_author": 1,
+    "author": "Unknown",
     "created_at": "2019-10-17T16:34:30.524Z",
-    "updated_at": "2019-11-07T06:40:59.824Z",
+    "updated_at": "2019-10-18T12:55:04.863Z",
     "tags": [
       2,
       5,
@@ -552,6 +502,24 @@
   "fields": {
     "name": "",
     "created_at": "2019-10-18T12:55:03.773Z"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$X4niv1F51evx$SIVXNUhDGeKzPVrammcq6lRlUuvLkfZSJtDpch+lq4s=",
+    "last_login": "2019-10-17T12:26:28.533Z",
+    "is_superuser": true,
+    "username": "ernest_aitiev",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2019-09-05T04:39:04.001Z",
+    "groups": [],
+    "user_permissions": []
   }
 }
 ]

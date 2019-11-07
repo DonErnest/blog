@@ -34,7 +34,7 @@ def register_view(request):
                        'Вы зарегистрировались на сайте localhost:8000.',
                        'Для активации перейдите по ссылке: {url}',
                        redirect_url='accounts:user_activate')
-            return redirect('webapp:index')
+            return redirect('index')
         else:
             return render(request, 'register.html', context={'form': form})
 
@@ -46,7 +46,7 @@ def user_activate_view(request, token):
     user.save()
     token.delete()
     login(request, user)
-    return redirect('webapp:index')
+    return redirect('index')
 
 
 class UserDetailView(DetailView):
